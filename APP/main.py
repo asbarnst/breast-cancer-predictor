@@ -134,8 +134,8 @@ def get_radar_chart(input_df):
 
 # Model Prediction
 def add_predictions(input_df):
-    model = pickle.load(open("C:\\Users\\Asbar\\OneDrive\\Desktop\\STREAMLIT-APP-CANSCER\\MODEL\\model.pkl", "rb"))
-    scaler = pickle.load(open("C:\\Users\\Asbar\\OneDrive\\Desktop\\STREAMLIT-APP-CANSCER\\MODEL\\scaler.pkl", "rb"))
+    model = pickle.load(open("../MODEL/model.pkl", "rb"))
+    scaler = pickle.load(open("../MODEL/scaler.pkl", "rb"))
     input_array_selected = scaler.transform(input_df)
     prediction = model.predict(input_array_selected)
     probability = model.predict_proba(input_array_selected)[0][0]
