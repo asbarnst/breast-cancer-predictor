@@ -152,8 +152,6 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded"
     )
-    with open("C:\\Users\\Asbar\\OneDrive\\Desktop\\STREAMLIT-APP-CANSCER\\assets\\style.css") as f:
-        st.markdown(f"<style></style>".format(f.read()), unsafe_allow_html=True)
 
     input_df = add_sidebar()
 
