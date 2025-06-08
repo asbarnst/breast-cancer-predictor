@@ -7,7 +7,7 @@ import numpy as np
 # Load and clean data
 @st.cache_data
 def get_clean_data():
-    data = pd.read_csv("C:\\Users\\Asbar\\OneDrive\\Desktop\\STREAMLIT-APP-CANSCER\\DATA\\data.csv")
+    data = pd.read_csv("../DATA/data.csv")
     data = data.drop(['Unnamed: 32', 'id'], axis=1)
     data['diagnosis'] = data['diagnosis'].map({'M': 1, 'B': 0})
     return data
