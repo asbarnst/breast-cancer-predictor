@@ -8,7 +8,7 @@ import pathlib
 # Load and clean data
 @st.cache_data
 def get_clean_data():
-    data_path = pathlib.Path(__file__).parent / "../DATA/data.csv"
+    data_path = (pathlib.Path(__file__).parent / "../DATA/data.csv").resolve()
     data = pd.read_csv(data_path)
     data = data.drop(['Unnamed: 32', 'id'], axis=1)
     data['diagnosis'] = data['diagnosis'].map({'M': 1, 'B': 0})
@@ -134,23 +134,24 @@ def get_radar_chart(input_df):
 
 # Model Prediction
 def add_predictions(input_df):
-    model = pickle.load(open("../MODEL/model.pkl", "rb"))
-    scaler = pickle.load(open("../MODEL/scaler.pkl", "rb"))
+    model_path = (pathlib.Path(__file__).parent / "../MODEL/model.pkl").resolve()
+    scaler_path = (pathlib.Path(__file__).parent / "../MODEL/scaler.pkl").resolve()
+
+    model = pickle.load(open(model_path, "rb"))
+    scaler = pickle.load(open(scaler_path, "rb"))
+
     input_array_selected = scaler.transform(input_df)
     prediction = model.predict(input_array_selected)
-    probability = model.predict_proba(input_array_selected)[0][0]
-    if prediction[0] == 0:
-        st.write(" Prediction: Benign")
-    else:
-        st.write("Prediction: Malignant")
-    
-    st.write(f"Probability of being benign: ",model.predict_proba(input_array_selected)[0][0])
-    st.write(f"Probability of being malignant: ",model.predict_proba(input_array_selected)[0][1])
+
+    st.write("Prediction:", "Benign" if prediction[0] == 0 else "Malignant")
+    st.write(f"Probability of being benign: {model.predict_proba(input_array_selected)[0][0]:.2f}")
+    st.write(f"Probability of being malignant: {model.predict_proba(input_array_selected)[0][1]:.2f}")
+
 # Main App
 def main():
     st.set_page_config(
         page_title="Breast Cancer Predictor",
-        page_icon="👩‍⚕️",
+        page_icon="👩‍⚕",
         layout="wide",
         initial_sidebar_state="expanded"
     )
@@ -175,12 +176,12 @@ def main():
 
     with st.container():
         st.markdown("#### ABOUT THIS APP :")
-        st.write("1. **Self-Examination Reminders**: Early detection can save lives...")
-        st.write("2. **Symptom & Health Tracker**: Keep track of changes in your body...")
-        st.write("3. **Medical Information & Resources**: Access reliable, up-to-date content...")
-        st.write("4. **Treatment & Appointment Management**: Stay organized during treatment...")
-        st.write("5. **Supportive Community & Stories**: Emotional support is important...")
-        st.write("6. **Data Privacy & Security**: We take your data seriously.")
+        st.write("1. *Self-Examination Reminders*: Early detection can save lives...")
+        st.write("2. *Symptom & Health Tracker*: Keep track of changes in your body...")
+        st.write("3. *Medical Information & Resources*: Access reliable, up-to-date content...")
+        st.write("4. *Treatment & Appointment Management*: Stay organized during treatment...")
+        st.write("5. *Supportive Community & Stories*: Emotional support is important...")
+        st.write("6. *Data Privacy & Security*: We take your data seriously.")
 
 if __name__ == '__main__':
     main()
