@@ -173,15 +173,21 @@ def main():
             st.markdown("### The Cell Cluster Prediction")
             st.write("The Cell Cluster is:")
             add_predictions(input_df)
+            
+    with st.expander("ℹ️ About this App"):
+        st.write("""
+        This application allows you to predict the likelihood of:
+        1. Breast Cancer: Using various cell nuclei measurements, you can predict whether a tumor is benign or malignant.
+        2. Breast Cancer Risk: Assess your risk based on medical history and lifestyle factors.
+        3. Breast Cancer Screening: Get recommendations for screening based on your age and risk factors.
+        4. Breast Cancer Treatment: Understand treatment options based on your diagnosis.
+        5. Breast Cancer Support: Find resources and support groups in your area.
 
-    with st.container():
-        st.markdown("#### ABOUT THIS APP :")
-        st.write("1. *Self-Examination Reminders*: Early detection can save lives...")
-        st.write("2. *Symptom & Health Tracker*: Keep track of changes in your body...")
-        st.write("3. *Medical Information & Resources*: Access reliable, up-to-date content...")
-        st.write("4. *Treatment & Appointment Management*: Stay organized during treatment...")
-        st.write("5. *Supportive Community & Stories*: Emotional support is important...")
-        st.write("6. *Data Privacy & Security*: We take your data seriously.")
+        The models used in this app are trained on the Breast Cancer Wisconsin (Diagnostic) dataset, which includes various features of cell nuclei from breast cancer biopsies. The app provides a user-friendly interface to input measurements and visualize predictions through a radar chart.
+        
+        This app was developed by Mohammed Asbar as part of his ML portfolio.
+        """)
+
 
 if __name__ == '__main__':
     main()
